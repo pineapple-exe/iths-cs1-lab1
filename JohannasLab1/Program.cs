@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.Serialization.Formatters;
 
 namespace JohannasLab1
 {
@@ -20,17 +18,16 @@ namespace JohannasLab1
 
         static void HighlightNumberChunks(string mixedString)
         {
-            double sum = 0;
+            long sum = 0;
 
-            for (int i = 0; i < mixedString.Length; i++)
+            for (int indexInitium = 0; indexInitium < mixedString.Length; indexInitium++)
             {
-                int indexInitium = i;
-                int indexFinito = LocateChunk(i, mixedString);
+                int indexFinito = LocateChunk(indexInitium, mixedString);
 
                 if (indexFinito > 0)
                 {
                     PrintColoredMix(mixedString, indexInitium, indexFinito);
-                    sum += double.Parse(mixedString.Substring(indexInitium, indexFinito - indexInitium + 1));
+                    sum += long.Parse(mixedString.Substring(indexInitium, indexFinito - indexInitium + 1));
                 }
             }
             Console.WriteLine();
@@ -38,19 +35,20 @@ namespace JohannasLab1
             Console.WriteLine();
         }
 
-        static int LocateChunk(int i, string mixedString)
+        static int LocateChunk(int indexInitium, string mixedString)
         {
             int indexFinito = 0;
-            for (int j = i + 1; j < mixedString.Length; j++)
+            char firstChar = mixedString[indexInitium];
+
+            for (int i = indexInitium + 1; i < mixedString.Length; i++)
             {
-                char firstChar = mixedString[i];
-                char currentChar = mixedString[j];
+                char currentChar = mixedString[i];
 
                 if (IsDigit(currentChar))
                 {
                     if (firstChar == currentChar)
                     {
-                        indexFinito = j;
+                        indexFinito = i;
                         break;
                     }
                 }
@@ -64,15 +62,19 @@ namespace JohannasLab1
 
         static void PrintColoredMix(string mixedString, int indexInitium, int indexFinito)
         {
+            const ConsoleColor baseColor = ConsoleColor.DarkYellow;
+
             if (indexInitium > 0)
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.ForegroundColor = baseColor;
                 Console.Write(mixedString.Substring(0, indexInitium));
             }
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.Write(mixedString.Substring(indexInitium, indexFinito - indexInitium + 1));
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
+
+            Console.ForegroundColor = baseColor;
             Console.Write(mixedString.Substring(indexFinito + 1));
+
             Console.WriteLine();
         }
 
