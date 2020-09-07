@@ -32,7 +32,6 @@ namespace JohannasLab1
             }
             Console.WriteLine();
             Console.WriteLine("Total = " + sum);
-            Console.WriteLine();
         }
 
         static int LocateChunk(int indexInitium, string mixedString)
