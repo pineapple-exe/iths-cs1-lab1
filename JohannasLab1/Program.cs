@@ -9,9 +9,13 @@ namespace JohannasLab1
     {
         static void Main(string[] args)
         {
-            HighlightNumberChunks("29535123p48723487597645723645");
-            HighlightNumberChunks("jjjjj");
-            HighlightNumberChunks("44");
+            if (args.Length != 1)
+            {
+                Console.WriteLine("Beep! Jag tar exakt ett argument.");
+                return;
+            }
+
+            HighlightNumberChunks(args[0]);
         }
 
         static void HighlightNumberChunks(string mixedString)
