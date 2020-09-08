@@ -61,6 +61,7 @@ namespace JohannasLab1
 
         static void PrintColoredMix(string mixedString, int indexInitium, int indexFinito)
         {
+            ConsoleColor oldColor = Console.ForegroundColor;
             const ConsoleColor baseColor = ConsoleColor.DarkYellow;
 
             if (indexInitium > 0)
@@ -74,6 +75,7 @@ namespace JohannasLab1
             Console.ForegroundColor = baseColor;
             Console.Write(mixedString.Substring(indexFinito + 1));
 
+            Console.ForegroundColor = oldColor;
             Console.WriteLine();
         }
 
