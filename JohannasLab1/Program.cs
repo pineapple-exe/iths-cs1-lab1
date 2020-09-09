@@ -26,8 +26,17 @@ namespace JohannasLab1
 
                 if (indexFinito > 0)
                 {
+                    try
+                    {
+                        sum += long.Parse(mixedString.Substring(indexInitium, indexFinito - indexInitium + 1));
+                    }
+                    catch (System.OverflowException)
+                    {
+                        Console.WriteLine("Stopp! Summan av delsträngarna är för stor för mig.");
+                        return;
+                    }
+
                     PrintColoredMix(mixedString, indexInitium, indexFinito);
-                    sum += long.Parse(mixedString.Substring(indexInitium, indexFinito - indexInitium + 1));
                 }
             }
             Console.WriteLine();
